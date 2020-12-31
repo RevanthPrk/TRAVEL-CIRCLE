@@ -1,0 +1,416 @@
+ 
+<html>
+ 
+<head>
+        <title>Moleskine Notebook with jQuery Booklet</title>
+         
+<link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+    
+    
+
+ <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700i" rel="stylesheet">
+ 
+ 
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+		<script src="booklet/jquery.easing.1.3.js" type="text/javascript"></script>
+		<script src="booklet/jquery.booklet.1.1.0.min.js" type="text/javascript"></script>
+
+		<link href="booklet/jquery.booklet.1.1.0.css" type="text/css" rel="stylesheet" media="screen" />
+		 
+		 
+		 <style>
+         
+              *{
+	margin:0;
+	padding:0;
+}
+body{
+	background:#eba426;	
+	color:#444;
+	font-size:12px;
+	color: #333;
+    font-family: 'Oswald', sans-serif;
+}
+ 
+ 
+.booklet           {
+	width:900px;
+	height:607px;
+	position:relative;
+	margin:0 auto 10px;
+	-moz-box-shadow:0px 0px 1px #fff;
+	-webkit-box-shadow:0px 0px 1px #fff;
+	box-shadow:0px 0px 1px #fff;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border-radius:10px;
+}
+.booklet .b-wrap-left  {
+	background:#fff url(images/left_bg.jpg) no-repeat top left;
+	-webkit-border-top-left-radius: 10px;
+	-webkit-border-bottom-left-radius: 10px;
+	-moz-border-radius-topleft:10px;
+	-moz-border-radius-bottomleft: 10px;
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+}
+.booklet .b-wrap-right {
+	background:#efefef url(images/right_bg.jpg) no-repeat top left;
+	-webkit-border-top-right-radius: 10px;
+	-webkit-border-bottom-right-radius: 10px;
+	-moz-border-radius-topright: 10px;
+	-moz-border-radius-bottomright: 10px;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+.booklet .b-counter {
+	bottom:10px;
+	position:absolute;
+	display:block;
+	width:90%;
+	height:20px;
+	border-top:1px solid #ddd;
+	color:#222;
+	text-align:center;
+	font-size:12px;
+	padding:5px 0 0;
+	background:transparent;
+	-moz-box-shadow:0px -1px 1px #fff;
+	-webkit-box-shadow:0px -1px 1px #fff;
+	box-shadow:0px -1px 1px #fff;
+	opacity:0.8;
+}
+.book_wrapper{
+	margin:0 auto;
+	padding-top:50px;
+	width:905px;
+	height:540px;
+	position:relative;
+	background:transparent url(images/bg.png) no-repeat 9px 27px;
+}
+.book_wrapper h1{
+	color:orange;
+	margin:5px 5px 5px 15px;
+	font-size:24px;
+	background:transparent url(images/h1.png) no-repeat bottom left;
+	padding-bottom:7px;
+    text-transform: uppercase;
+    font-weight: normal;
+}
+.book_wrapper p{
+	font-size:15px;
+	margin:5px 5px 5px 15px;
+}
+.book_wrapper a.article,
+.book_wrapper a.demo{
+	background:transparent url(images/circle.png) no-repeat 50% 0px;
+	display:block;
+	width:95px;
+	height:41px;
+	text-decoration:none;
+	outline:none;
+	font-size:16px;
+	color:#555;
+	float:left;
+	line-height:41px;
+	padding-left:47px;
+}
+.book_wrapper a.demo{
+	margin-left:50px;
+}
+.book_wrapper a.article:hover,
+.book_wrapper a.demo:hover{
+	background-position:50% -41px;
+	color:#13386a;
+}
+.book_wrapper img{
+	margin:10px 0px 5px 35px;
+	width:300px;
+	padding:4px;
+	border:1px solid #ddd;
+	-moz-box-shadow:1px 1px 1px #fff;
+	-webkit-box-shadow:1px 1px 1px #fff;
+	box-shadow:1px 1px 1px #fff;
+}
+.booklet .b-wrap-right img{
+	border:1px solid #E6E3C2;
+}
+a#next_page_button,
+a#prev_page_button{
+	display:none;
+	position:absolute;
+	width:41px;
+	height:40px;
+	cursor:pointer;
+	margin-top:-20px;
+	top:50%;
+	background:transparent url(images/buttons.png) no-repeat 0px -40px;
+}
+a#prev_page_button{
+	left:-30px;
+}
+a#next_page_button{
+	right:-30px;
+	background-position:-41px -40px;
+}
+a#next_page_button:hover{
+	background-position:-41px 0px;
+}
+a#prev_page_button:hover{
+	background-position:0px 0px;
+}
+#mySidenav a {
+  position: absolute;
+  left: -100px;
+  transition: 0.3s;
+  padding: 15px;
+  width: 100px;
+  text-decoration: none;
+  font-size: 13px;
+  color: white;
+  border-radius: 0 5px 5px 0;
+
+}
+
+#mySidenav a:hover {
+  left: 0;
+}
+
+#about {
+  top: 20px;
+  background-color:#8619bb;
+}
+
+#blog {
+  top: 80px;
+  background-color: #8619bb;
+}
+
+.nav-wrapper {
+  display: flex;
+  justify-content: space-between;
+  padding: 38px;
+}
+
+.left-side {
+  display: flex;
+}
+
+.nav-wrapper > .left-side > div {
+  margin-right: 20px;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+}
+
+.nav-link-wrapper {
+  height: 22px;
+  border-bottom: 1px solid transparent;
+  transition: border-bottom 0.5s;
+}
+
+.active-nav-link {
+  border-bottom: 1px solid black;
+}
+
+.active-nav-link a {
+  color: black !important;
+}
+
+.nav-link-wrapper a {
+  color: #8a8a8a;
+  text-decoration: none;
+  transition: color 0.5s;
+}
+
+.nav-link-wrapper:hover {
+  border-bottom: 1px solid black;
+}
+
+.nav-link-wrapper a:hover {
+  color: black;
+}
+
+
+ 
+    
+    
+         </style>
+		 
+    </head>
+    <body>
+    	<div id="mySidenav" class="sidenav">
+		
+  <a href="/register.html" id="about">HOME</a>
+  <a href="ABC.html" id="blog">HELLO</a>
+ 
+</div>
+<div class="nav-wrapper">
+      <div class="left-side">
+        <div class="nav-link-wrapper">
+          <a href="htdocs/register.html"></a>
+        </div>
+
+        <div class="nav-link-wrapper">
+          <a href="categories.html"></a>
+        </div>
+      </div>
+<div class="right-side">
+        <div class="brand">
+         <H2> TRAVEL CIRCLE</H2>
+        </div>
+      </div>
+  </div>
+  <CENTER><H1>EXPLORE HYDERABAD</H1></CENTER>
+    <br>
+		 
+		<div class="book_wrapper">
+			<a id="next_page_button"></a>
+			<a id="prev_page_button"></a>
+			 
+			<div id="mybook" style="display:none;">
+				<div class="b-load">
+					<div>
+						<img src="images/mapp.jpg" alt=""/>
+						<h1>HYDERABAD</h1>
+						<p>Hyderabad is the capital and largest city of the Indian state of Telangana. Occupying 650 square kilometres along the banks of the Musi River, located on the Deccan Plateau of South India.Hyderabad City has a population of about 6.9 million,making it the fourth-most populous city and sixth-most populous urban agglomeration in India. With an output of US$74 billion, Hyderabad is the 5th-largest contributor to India's overall GDP.
+
+</p>
+						<a href="" class="article">ARTICLE</a>
+						<a href="" class="demo">DEMO</a>
+					</div>
+					<div>
+						<img src="images/places.jpg" alt="" />
+						<h1>TOURIST SPOTS</h1>
+						<p>The tourism industry forms an important role in the economy of Hyderabad. It was ranked 3rd Best City to Travel in 2013 by Lonely Planet.Telangana hyderabad, which is India's top domestic tourist destination, receives up to 157 million visits,and reached 1.5 million international tourists, which generated US$23 million in revenue.Toursist spots Mecca masjid,Salarjung meuseum,Golconda,Charminar,etc.. attracts the tourists alot</p>
+						<a href="" target="_blank" class="article">ARTICLE</a>
+						<a href="" class="demo">DEMO</a>
+					</div>
+					<div>
+						<img src="images/charminar.jpg" alt="" />
+						<h1>CHARMINAR</h1>
+						<p>A major landmark of Hyderabad with 4 graceful minarets located in the old city. It was built by Muhammed Quli Qutb Shah as a memorial for plague victims. Charminar, on most occasions, is used to represent the state and is hailed as a unique Deccan monument. It is in the midst of Charkaman which are four archways to roads leading in all four directions from the Charminar monument.</p>
+						<a href="" target="_blank" class="article">ARTICLE</a>
+						<a href="" class="demo">DEMO</a>
+					</div>
+					<div>
+						<img src="images/goll.jpg" alt="" />
+						<h1>GLOCONDA FORT</h1>
+						<p>Golconda Fort, also known as Golkonda (lit. "round hill") is a fortified citadel and an early capital city of the Qutb Shahi dynasty (c.1512–1687), located in Hyderabad.Once abandoned by Qutub Shahis, Golconda Fort is one of the most magnificent fortress complexes in India. Seated on a hill on one side and spiraling fort on the other, its location and internal design made it one of the strongest forts in India.</p>
+						<a href="" target="_blank" class="article">ARTICLE</a>
+						<a href="" class="demo">DEMO</a>
+					</div>
+					<div>
+						<img src="images/hhhh.jpg" alt="" />
+						<h1>HUSSAIN SAGAR</h1>
+						<p>Hussain Sagar is a heart-shaped lake in Hyderabad, Telangana, built by Ibrahim Quli Qutb Shah in 1563. It is spread across an area of 5.7 square kilometers and is fed by the River Musi.It is a man-made lake famous for the 19-metre tall statue of Buddha in the middle of the lake.Located on its banks is Tank Bund which consists of gardens and statues of famous personalities. Boating and water sports are daily activities.</p>
+						<a href="" class="article">ARTICLE</a>
+						<a href="" class="demo">DEMO</a>
+					</div>
+					<div>
+						<img src="images/hhhhh.jpg" alt="" />
+						<h1>BIRLA MANDHIR</h1>
+						<p>Birla Mandir is a Hindu temple, built on a 280 feet high hillock called Naubath Pahad. The construction took 10 years and was opened in 1976 by Swami Ranganathananda of Ramakrishna Mission. The temple was constructed by Birla Foundation,all of which are known as Birla Mandir.Apart from the main shrine,The temple also has separate shrines for various Hindu gods and goddess</p>
+						<a href="" class="article">ARTICLE</a>
+						<a href="" class="demo">DEMO</a>
+					</div>
+					<div>
+						<img src="images/h6.jpg" alt="" />
+						<h1>RAMOJI FILM CITY</h1>
+						<p> It is the world's largest integrated film studio cum theme park, covering 1666 acres. It is also one of Asia's most popular tourism and recreation centres. Recently, it made its way into the Guinness Book of World Records for being the largest film studio in the world. Opened in 1996, it is about a 20-minute drive from Hyderabad on Vijayawada Highway.</p>
+						<a href="" class="article">ARTICLE</a>
+						<a href="" class="demo">DEMO</a>
+					</div>
+					<div>
+						<img src="images/hhh.jpg" alt="" />
+						<h1>CHOWMAHALLA PALACE</h1>
+						<p>It was the seat of Asaf Jahi dynasty, where the Nizam entertained his official guests and royal visitors. Initiated in 1750 by Nizam Salabat Jung and designed along the lines of the Shah's palace in Isfahan, this actually consists of a group of palaces each used as a Durbar Hall. It has now been aesthetically renovated and is also a venue for conferences.</p>
+						<a href="" class="article">ARTICLE</a>
+						<a href="" class="demo">DEMO</a>
+					</div>
+					<div>
+						<img src="images/biryanii.jpg" alt="" />
+						<h1>HYDERABADI-BIRYANI</h1>
+						<p>Hyderabadi biryani is generally believed to have originated in the kitchens of the Nizam of Hyderabad,as a blend of Mughlai and Iranian cuisine.The ingredients are basmati rice, goat meat or chicken or beef, dahi, onions, cinnamon, cloves, cardamom ,bay leaves, nutmeg, black cumin, mace flower, star anise, lemon, and saffron. Coriander leaves and fried onions are used as garnish. The original dish is done with red meat but chicken, fish, prawns or vegetables.</p>
+						<a href="" class="article">ARTICLE</a>
+						<a href="" class="demo">DEMO</a>
+					</div>
+					<div>
+						<img src="images/haleem.jpg" alt="" />
+						<h1>WORLD FAMOUS HALEEM</h1>
+						<p>Hyderabadi haleem is a type of haleem popular in the Indian city of Hyderabad. Haleem is a stew composed of meat, lentils and pounded wheat made into a thick paste. It is originally an Arabic dish and was introduced to the Hyderabad State by the Chaush people during the rule of the Nizams.</p>
+						<a href="" class="article">ARTICLE</a>
+						<a href="" class="demo">DEMO</a>
+					</div>
+					<div>
+						<img src="images/mapp.jpg" alt="" />
+						<h1>TOURIST VIEW </h1>
+						<p>Hyderabad is located in the south-eastern part of the state of Telangana. It lies on the Deccan Plateau, on the banks of Musi river. Its metropolitan area covers a vast distance of 650 square kilometres, making it one of the largest cities in the state. The city is situated at a height of 542 metres (1,778 ft) above sea level. It lies on a sloping terrain of pink and grey granite, having small hills.</p>
+						<a href="" class="article">ARTICLE</a>
+						<a href="" class="demo">DEMO</a>
+					</div>
+					<div>
+						<img src="images/hyd6.png" alt="" />
+						<h1>TRANSPORTATION</h1>
+						<p>Transport in Hyderabad is the network of roads, railways, rapid transit system in the capital and the largest city of Telangana.The city of Hyderabad also serves as the central hub of transport and logistics within the state.various modes of transportation are Bus,Setwin,Taxis,Rail,Air,MMTS,Metro...</p>
+						<a href="" class="article">ARTICLE</a>
+						<a href="" class="demo">DEMO</a>
+					</div>
+					<div>
+						<img src="images/bonalu.jpg" alt="" />
+						<h1>TRADITION(EVER GREEN BONALU)</h1>
+						<p>The word Bonam is a contraction of the word Bhojanam.Bonalu or Mother energy symbolized as pot is a Dravidian traditionFestival.It is called Jatara. This tradition is celebrated as an annual festival of Telangana for Ellamma who is honored as mother earth. It is celebrated in the month of Ashada Masam, in July/August. Special poojas are performed for Yellamma on the first and last day of the festival.</p>
+						<a href="" class="article">ARTICLE</a>
+						<a href="" class="demo">DEMO</a>
+					</div>
+					<div>
+						<img src="images/bathu.jpg" alt="" />
+						<h1>TELANGANA FESTIVAL-BATHUKAMMA</h1>
+						<p>Bathukamma is floral festival celebrated predominantly by the Telangana and some parts of Andhra Pradesh. Every year this festival is celebrated for nine days starting Bhadrapada Pournami till Durgashtami during Durga Navaratri, usually in September–October of Gregorian calendar. It starts on the day of Mahalaya Amavasya and the 9-day festivities on "Saddula Bathukamma" or "Pedda Bathukamma" popularly known as Durgashtami which is two days before Dussehra.</p>
+						<a href="" class="article">ARTICLE</a>
+						<a href="" class="demo">DEMO</a>
+					</div>
+				</div>
+			</div>
+		</div>
+        
+        <script type="text/javascript">
+			$(function() {
+				var $mybook 		= $('#mybook');
+				var $bttn_next		= $('#next_page_button');
+				var $bttn_prev		= $('#prev_page_button');
+				var $loading		= $('#loading');
+				var $mybook_images	= $mybook.find('img');
+				var cnt_images		= $mybook_images.length;
+				var loaded			= 0;
+				 
+				$mybook_images.each(function(){
+					var $img 	= $(this);
+					var source	= $img.attr('src');
+					$('<img/>').load(function(){
+						++loaded;
+						if(loaded == cnt_images){
+							$loading.hide();
+							$bttn_next.show();
+							$bttn_prev.show();
+							$mybook.show().booklet({
+								name:               null,                            //  
+								width:              800,                             //  
+								height:             500,                             //   
+								speed:              600,                             //  
+								direction:          'LTR',                           //  
+								                           //  
+								next:               $bttn_next,          			//  
+								prev:               $bttn_prev,          			//  
+								                       
+							});
+							Cufon.refresh();
+						}
+					}).attr('src',source);
+				});
+				
+			});
+        </script>
+ 
+    </body>
+ 
+</html>
